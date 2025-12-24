@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     id: product.id,
                     name: product.name,
                     price: product.price,
-                    image: "../" + product.image,
+                    image: product.image,
                     quantity: 1
                 });
             }
@@ -114,7 +114,7 @@ function showFarmerDetails(farmerName) {
                         <div class="details-modal__body">
                             <div class="details-modal__header">
                                 <div class="details-modal__photo">
-                                    <img src="../${farmer.image}" alt="${farmer.name}">
+                                    <img src="${farmer.image}" alt="${farmer.name}">
                                 </div>
                                 <div class="details-modal__info">
                                     <h3>${farmer.name}</h3>
