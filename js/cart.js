@@ -9,8 +9,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     let discount = 0; // скидка в процентах
 
     try {
-    const res = await fetch('./data/products.json');
-        products = await res.json();
+        if (typeof window.productsData !== 'undefined') {
+            products = window.productsData;
+        } else {
+            const res = await fetch('./data/products.json');
+            products = await res.json();
+        }
     } catch (e) {
         console.error('Не удалось загрузить товары', e);
     }
@@ -42,10 +46,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         cart.forEach(item => {
             total += item.price * item.quantity;
 
+            // Fix potential path issues from legacy data
+            const cleanImage = item.image.replace(/^\.\.\//, '');
+
             const li = document.createElement('li');
             li.className = 'cart__item';
             li.innerHTML = `
-                <img src="${item.image}" alt="${item.name}" class="cart__item-img" />
+                <img src="${cleanImage}" alt="${item.name}" class="cart__item-img" />
                 <div class="cart__item-info">
                     <h3>${item.name}</h3>
                     <p>Цена: ${item.price} ₽</p>

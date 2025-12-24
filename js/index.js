@@ -90,7 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         const cart = getCartLocal();
                         const existing = cart.find(item => item.id == product.id);
                         if (existing) existing.quantity = (existing.quantity || 1) + 1;
-                        else cart.push({ id: product.id, name: product.name, price: product.price, image: '../' + product.image, quantity: 1 });
+                        else cart.push({ id: product.id, name: product.name, price: product.price, image: product.image, quantity: 1 });
                         saveCartLocal(cart);
 
                         // Показываем простой toast
@@ -126,7 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
     })();
 
     // Загрузка фермеров
-    fetch("../data/farmers.json")
+    fetch("./data/farmers.json")
         .then(res => res.json())
         .then(farmers => {
             const container = document.querySelector(".farmers__grid");
@@ -140,7 +140,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 card.innerHTML = `
                     <div class="farmer-card__photo">
-                        <img src="../${farmer.image}" alt="${farmer.name}">
+                        <img src="${farmer.image}" alt="${farmer.name}">
                     </div>
                     <div class="farmer-card__content">
                         <h3 class="farmer-card__name">${farmer.name}</h3>

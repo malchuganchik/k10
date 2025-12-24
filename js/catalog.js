@@ -19,8 +19,12 @@ document.addEventListener('DOMContentLoaded', async () => {
   let products = [];
 
   try {
-  const res = await fetch('./data/products.json');
-  products = await res.json();
+    if (typeof window.productsData !== 'undefined') {
+        products = window.productsData;
+    } else {
+        const res = await fetch('./data/products.json');
+        products = await res.json();
+    }
     
     // Проверка URL параметра поиска перед рендером
     const urlParams = new URLSearchParams(window.location.search);
